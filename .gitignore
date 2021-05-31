@@ -2,3 +2,11 @@
 .*
 
 !.git*
+
+# Build artifacts
+[Bb]uild/
+[Bb]in/
+[Oo]bj/
+
+[Rr]elease/
+[Dd]ebug/
