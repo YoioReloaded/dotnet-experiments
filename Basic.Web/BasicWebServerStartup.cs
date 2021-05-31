@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 #endregion
+#region Internal Includes
+using Basic.Web.Internals.Extensions;
+#endregion
 
 namespace Basic.Web {
     
@@ -13,17 +16,16 @@ namespace Basic.Web {
         
             appBuilder.Run(async (HttpContext context) => 
             {   
-                string requestUrl = " *not set*";
+                string requestProps = " *not set*";
                 try
                 {
-                    var req = context.Request;
-                    requestUrl = $" {req.Method} {req.Scheme}://{req.Host}{req.Path}{req.QueryString}";
+                    requestProps = context.Request.Serialize(depth:3);
                 }
                 finally
                 {
                     await context.Response.WriteAsync(
 $@"
-Request ---{requestUrl}
+Request ---{requestProps}
 ");
                 }
             });
